@@ -6,7 +6,9 @@ public class CdkProjectApp {
     public static void main(final String[] args) {
         App app = new App();
 
-        new VpcStack(app, "VPC");
+        VpcStack vpc = new VpcStack(app, "VPC");
+        ClusterStack cluster = new ClusterStack(app, "Cluster", vpc.getVpc());
+        cluster.addDependency(vpc);
         app.synth();
     }
 }
