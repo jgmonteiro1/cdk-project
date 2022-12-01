@@ -1,4 +1,4 @@
-package com.myorg;
+package com.jgmonteiro;
 
 import software.amazon.awscdk.Duration;
 import software.amazon.awscdk.RemovalPolicy;
