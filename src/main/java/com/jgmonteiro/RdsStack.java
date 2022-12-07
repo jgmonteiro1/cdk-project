@@ -1,5 +1,6 @@
 package com.jgmonteiro;
 
+import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.CfnParameter;
 import software.amazon.awscdk.SecretValue;
 import software.amazon.awscdk.Stack;
@@ -62,6 +63,16 @@ public class RdsStack extends Stack {
                 .vpcSubnets(SubnetSelection.builder()
                         .subnets(vpc.getPrivateSubnets())
                         .build())
+                .build();
+
+        CfnOutput.Builder.create(this, "rds-endpoint")
+                .exportName("rds-endpoint")
+                .value(databaseInstance.getDbInstanceEndpointAddress())
+                .build();
+
+        CfnOutput.Builder.create(this, "rds-password")
+                .exportName("rds-password")
+                .value(databasePassword.getValueAsString())
                 .build();
     }
 }
